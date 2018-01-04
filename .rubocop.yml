@@ -152,7 +152,3 @@ Style/RedundantReturn:
 Style/Semicolon:
   Enabled: true
   AllowAsExpressionSeparator: true
-
-inherit_gem:
-  rubocop-rails:
-    - config/rails.yml
