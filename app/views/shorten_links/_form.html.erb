@@ -1,0 +1,38 @@
+<%# frozen_string_literal: true %>
+<%= form_with(model: shorten_link, local: true) do |form| %>
+  <% if shorten_link.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(shorten_link.errors.count, "error") %> prohibited this shorten_link from being saved:</h2>
+
+      <ul>
+      <% shorten_link.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :url %>
+    <%= form.text_field :url, id: :shorten_link_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :slug %>
+    <%= form.text_field :slug, id: :shorten_link_slug %>
+  </div>
+
+  <div class="field">
+    <%= form.label :custom %>
+    <%= form.check_box :custom, id: :shorten_link_custom %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deleted_at %>
+    <%= form.datetime_select :deleted_at, id: :shorten_link_deleted_at %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

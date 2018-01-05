@@ -1,0 +1,25 @@
+<%# frozen_string_literal: true %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @shorten_link.url %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @shorten_link.slug %>
+</p>
+
+<p>
+  <strong>Custom:</strong>
+  <%= @shorten_link.custom %>
+</p>
+
+<p>
+  <strong>Deleted at:</strong>
+  <%= @shorten_link.deleted_at %>
+</p>
+
+<%= link_to 'Edit', edit_shorten_link_path(@shorten_link) %> |
+<%= link_to 'Back', shorten_links_path %>
