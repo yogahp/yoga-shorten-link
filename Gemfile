@@ -53,6 +53,7 @@ group :development do
   gem "brakeman", require: false
   gem "rubocop"
   gem "magic_frozen_string_literal"
+  gem "bundler-audit"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
