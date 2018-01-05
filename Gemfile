@@ -55,6 +55,7 @@ group :development do
   gem "rubocop"
   gem "magic_frozen_string_literal"
   gem "bundler-audit"
+  gem "pry"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
