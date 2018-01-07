@@ -33,6 +33,21 @@ class ShortenLinksController < ApplicationController
     end
   end
 
+  def show
+    shorten_link = ShortenLink.find_by(slug: params[:id])
+
+    if shorten_link.blank?
+      redirect_to new_shorten_link_path, flash: { alert: "Shorten Link not found" }
+    else
+      if shorten_link.url =~ URI::regexp
+        uri = URI.parse(shorten_link.url)
+        redirect_to uri.to_s
+      else
+        redirect_to new_shorten_link_path, flash: { alert: "URL is not a valid URI" }
+      end
+    end
+  end
+
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def shorten_link_params

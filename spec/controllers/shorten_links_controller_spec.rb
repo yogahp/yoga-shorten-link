@@ -72,4 +72,14 @@ RSpec.describe ShortenLinksController, type: :controller do
       end
     end
   end
+
+  describe "GET #show" do
+    let(:shorten_link) { create :shorten_link }
+
+    it "redirect to desired path" do
+      get :show, params: { id: shorten_link.slug }
+
+      expect(response).to redirect_to(shorten_link.url)
+    end
+  end
 end
