@@ -29,11 +29,25 @@ describe ShortenLink, type: :model do
 
   context "validation" do
     it { should validate_presence_of(:url) }
+    it { should validate_uniqueness_of(:url) }
 
     let(:shorten_link) { create :shorten_link }
 
     it "validate url" do
       expect(valid_url?(shorten_link.url)).to eql(true)
+    end
+
+    it "validate slug" do
+      shorten_link = ShortenLink.new(url: "http://www.google.com", slug: nil, custom: true)
+      shorten_link.save
+      expect(shorten_link.errors).to be_present
+    end
+
+    it "uniq slug" do
+      existing_shorten_link = create :shorten_link
+      shorten_link = ShortenLink.new(url: "http://www.google.com", slug: existing_shorten_link.slug, custom: true)
+      shorten_link.save
+      expect(shorten_link.errors).to be_present
     end
   end
 

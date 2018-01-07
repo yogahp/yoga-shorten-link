@@ -18,6 +18,8 @@ RSpec.describe "shorten_links/new", type: :view do
 
       assert_select "input[name=?]", "shorten_link[url]"
 
+      assert_select "input[name=?]", "shorten_link[slug]"
+
       assert_select "input[name=?]", "shorten_link[custom]"
     end
   end

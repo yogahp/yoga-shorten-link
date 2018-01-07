@@ -20,6 +20,13 @@ class ShortenLinksController < ApplicationController
         url_link = self.class.helpers.link_to(raw("<span class='fa fa-external-link'></span>"), "#{request.url}/#{@shorten_link.slug}", target: "_blank")
         format.html { redirect_to(new_shorten_link_path, notice: "Shorten link was successfully created. Your shorten url is #{request.url}/#{@shorten_link.slug} #{url_link}", flash: { html_safe: true }) }
       else
+        existing_shorten_link = ShortenLink.find_by(url: shorten_link_params[:url])
+
+        if existing_shorten_link.present?
+          url_link = self.class.helpers.link_to(raw("<span class='fa fa-external-link'></span>"), "#{request.url}/#{existing_shorten_link.slug}", target: "_blank")
+          flash.now[:notice] = "Shorten link was existed. Your shorten url is #{request.url}/#{existing_shorten_link.slug} #{url_link}".html_safe
+        end
+
         format.html { render :new }
         format.json { render json: @shorten_link.errors, status: :unprocessable_entity }
       end
@@ -29,6 +36,6 @@ class ShortenLinksController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def shorten_link_params
-      params.require(:shorten_link).permit(:url, :custom)
+      params.require(:shorten_link).permit(:url, :custom, :slug)
     end
 end
