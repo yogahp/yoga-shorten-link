@@ -15,7 +15,7 @@
 
 FactoryBot.define do
   factory :shorten_link do
-    url "MyString"
+    url "https://www.#{Faker::Name.first_name.downcase}.com"
     slug "MyString"
     custom false
   end

@@ -18,4 +18,14 @@ class ShortenLink < ApplicationRecord
   acts_as_paranoid
 
   validates :url, presence: true
+  validates :url, url: true
+
+  after_create :generate_slug
+
+  private
+
+    def generate_slug
+      self.slug = self.id.to_s(36)
+      self.save
+    end
 end

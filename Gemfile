@@ -46,6 +46,7 @@ group :development, :test do
   gem "rails-controller-testing"
   gem "shoulda-matchers", "~> 3.1"
   gem "factory_bot_rails"
+  gem "faker"
 end
 
 group :development do
@@ -71,3 +72,5 @@ gem "less-rails" # Sprockets (what Rails 3.1 uses for its asset pipeline) suppor
 gem "twitter-bootstrap-rails"
 gem "jquery-rails"
 gem "jquery-ui-rails"
+gem "font-awesome-rails"
+gem "validate_url"

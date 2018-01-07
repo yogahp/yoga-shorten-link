@@ -13,8 +13,8 @@
 #  updated_at :datetime         not null
 #
 
-
 require "rails_helper"
+require "uri"
 
 describe ShortenLink, type: :model do
   context "db column" do
@@ -29,6 +29,12 @@ describe ShortenLink, type: :model do
 
   context "validation" do
     it { should validate_presence_of(:url) }
+
+    let(:shorten_link) { create :shorten_link }
+
+    it "validate url" do
+      expect(valid_url?(shorten_link.url)).to eql(true)
+    end
   end
 
   context "soft delete" do
@@ -39,4 +45,19 @@ describe ShortenLink, type: :model do
       expect(shorten_link.deleted_at).to be_present
     end
   end
+
+  context "after create" do
+    it do
+      shorten_link = ShortenLink.new(url: "http://www.google.com")
+      shorten_link.save
+      expect(shorten_link.slug).to be_present
+    end
+  end
+end
+
+def valid_url?(uri)
+  uri = URI.parse(uri)
+  !uri.host.nil?
+rescue URI::InvalidURIError
+  false
 end
