@@ -46,6 +46,5 @@ bower.json
 # Ignore node_modules
 node_modules/
 analyze.sh
-config/database.yml
 coverage
 test-reporter-latest-darwin-amd64
